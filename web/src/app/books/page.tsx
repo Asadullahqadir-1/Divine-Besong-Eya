@@ -5,6 +5,7 @@ import { Container } from "@/components/Container";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Stagger } from "@/components/Stagger";
+import { AddToCartButton } from "@/components/AddToCartButton";
 import { getBooks } from "@/lib/cms";
 
 export const metadata: Metadata = {
@@ -45,7 +46,7 @@ export default async function BooksPage() {
             )}
             <h2 className="font-display text-3xl leading-tight text-navy">{book.title}</h2>
             <p className="mt-3 text-sm text-ink/75">{book.description}</p>
-            {book.price ? <p className="mt-2 text-lg font-semibold text-navy">£{book.price.toFixed(2)}</p> : null}
+            {book.price ? <p className="mt-2 text-lg font-semibold text-navy">AED {book.price.toFixed(2)}</p> : null}
             <div className="mt-5 flex flex-wrap gap-3">
               {book.pdfUrl ? (
                 <a
@@ -65,14 +66,24 @@ export default async function BooksPage() {
               >
                 Learn More
               </Link>
-              <Link
-                href={book.externalLink}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-live rounded-full border border-navy px-4 py-2 text-sm font-semibold text-navy hover:bg-navy hover:text-white"
-              >
-                Buy
-              </Link>
+              {book.price ? (
+                <AddToCartButton
+                  id={book.slug}
+                  title={book.title}
+                  price={book.price}
+                  slug={book.slug}
+                  coverImageUrl={book.coverImageUrl}
+                />
+              ) : (
+                <Link
+                  href={book.externalLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-live rounded-full border border-navy px-4 py-2 text-sm font-semibold text-navy hover:bg-navy hover:text-white"
+                >
+                  Buy Online
+                </Link>
+              )}
             </div>
           </article>
         ))}

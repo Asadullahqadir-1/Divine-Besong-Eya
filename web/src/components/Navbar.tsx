@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Container } from "@/components/Container";
+import { CartIcon } from "@/components/CartIcon";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -34,7 +35,7 @@ export function Navbar() {
           Menu
         </button>
 
-        <nav className="hidden items-center gap-7 md:flex">
+        <nav className="hidden items-center gap-5 md:flex">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -52,6 +53,7 @@ export function Navbar() {
               Admin Login
             </Link>
           ) : null}
+          <CartIcon />
           <Link
             href="/contact"
             className="btn-live rounded-full bg-navy px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-ink"
@@ -83,6 +85,13 @@ export function Navbar() {
                 Admin Login
               </Link>
             ) : null}
+            <Link
+              href="/cart"
+              className="btn-live mt-1 inline-flex w-max rounded-full border border-navy px-4 py-2 text-sm font-semibold text-navy"
+              onClick={() => setOpen(false)}
+            >
+              🛒 Cart
+            </Link>
             <Link
               href="/contact"
               className="btn-live mt-1 inline-flex w-max rounded-full bg-navy px-4 py-2 text-sm font-semibold text-white"
