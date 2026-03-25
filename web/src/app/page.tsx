@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/Container";
 import { Hero } from "@/components/Hero";
 import { SectionHeader } from "@/components/SectionHeader";
@@ -100,16 +101,20 @@ export default async function HomePage() {
           />
           <Stagger className="mt-8 grid gap-5 md:grid-cols-2">
             {bookList.slice(0, 2).map((book) => (
-              <Card
-                key={book.slug}
-                title={book.title}
-                description={book.description}
-                ctaText="Learn More"
-                ctaLink={book.externalLink}
-                meta={book.featured ? "Featured" : undefined}
-                imageUrl={book.coverImageUrl}
-                imageAlt={book.imageAlt}
-              />
+              <div key={book.slug} className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
+                {book.coverImageUrl && (
+                  <div className="mb-4 overflow-hidden rounded-xl">
+                    <Image src={book.coverImageUrl} alt={book.imageAlt} width={400} height={250} className="h-40 w-full object-cover" />
+                  </div>
+                )}
+                {book.featured && <p className="text-xs uppercase tracking-wider text-ink/60">Featured</p>}
+                <h3 className="font-display text-xl text-navy mt-2">{book.title}</h3>
+                <p className="text-sm text-ink/75 mt-2">{book.description}</p>
+                <p className="text-lg font-semibold text-navy mt-3">£{(book.price ?? 5.99).toFixed(2)}</p>
+                <Link href="/books" className="btn-live mt-4 inline-block rounded-full bg-navy px-4 py-2 text-sm font-semibold text-white hover:bg-ink transition">
+                  View All Books
+                </Link>
+              </div>
             ))}
           </Stagger>
         </Reveal>

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/Container";
 import { Reveal } from "@/components/Reveal";
@@ -46,44 +45,15 @@ export default async function BooksPage() {
             )}
             <h2 className="font-display text-3xl leading-tight text-navy">{book.title}</h2>
             <p className="mt-3 text-sm text-ink/75">{book.description}</p>
-            {book.price ? <p className="mt-2 text-lg font-semibold text-navy">AED {book.price.toFixed(2)}</p> : null}
+            <p className="mt-2 text-lg font-semibold text-navy">£{(book.price ?? 5.99).toFixed(2)}</p>
             <div className="mt-5 flex flex-wrap gap-3">
-              {book.pdfUrl ? (
-                <a
-                  href={book.pdfUrl}
-                  download
-                  rel="noreferrer"
-                  className="btn-live rounded-full bg-navy px-4 py-2 text-sm font-semibold text-white"
-                >
-                  Download PDF
-                </a>
-              ) : null}
-              <Link
-                href={book.externalLink}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-live rounded-full bg-navy px-4 py-2 text-sm font-semibold text-white"
-              >
-                Learn More
-              </Link>
-              {book.price ? (
-                <AddToCartButton
-                  id={book.slug}
-                  title={book.title}
-                  price={book.price}
-                  slug={book.slug}
-                  coverImageUrl={book.coverImageUrl}
-                />
-              ) : (
-                <Link
-                  href={book.externalLink}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-live rounded-full border border-navy px-4 py-2 text-sm font-semibold text-navy hover:bg-navy hover:text-white"
-                >
-                  Buy Online
-                </Link>
-              )}
+              <AddToCartButton
+                id={book.slug}
+                title={book.title}
+                price={book.price ?? 5.99}
+                slug={book.slug}
+                coverImageUrl={book.coverImageUrl}
+              />
             </div>
           </article>
         ))}

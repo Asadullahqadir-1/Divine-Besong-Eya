@@ -46,10 +46,10 @@ export default function CartPage() {
 
   const shareViaWhatsApp = () => {
     const itemsList = cartItems
-      .map((item) => `${item.title} x${item.quantity} - AED ${(item.price * item.quantity).toFixed(2)}`)
+      .map((item) => `${item.title} x${item.quantity} - £${(item.price * item.quantity).toFixed(2)}`)
       .join("%0A");
 
-    const message = `Hi! I'd like to order:%0A%0A${itemsList}%0A%0ATotal: AED ${total.toFixed(2)}%0A%0APlease send bank transfer details.`;
+    const message = `Hi! I'd like to order:%0A%0A${itemsList}%0A%0ATotal: £${total.toFixed(2)}%0A%0APlease send bank transfer details.`;
     window.open(`https://wa.me/971526981013?text=${message}`, "_blank");
   };
 
@@ -112,7 +112,7 @@ export default function CartPage() {
                   )}
                   <div className="flex-1">
                     <h3 className="font-semibold text-navy">{item.title}</h3>
-                    <p className="text-sm text-ink/70">AED {item.price.toFixed(2)}</p>
+                    <p className="text-sm text-ink/70">£{item.price.toFixed(2)}</p>
                     <div className="mt-2 flex items-center gap-2">
                       <button
                         onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}
@@ -131,7 +131,7 @@ export default function CartPage() {
                   </div>
                   <div className="text-right">
                     <p className="font-semibold text-navy">
-                      AED {(item.price * item.quantity).toFixed(2)}
+                      £{(item.price * item.quantity).toFixed(2)}
                     </p>
                     <button
                       onClick={() => handleRemoveItem(item.id)}
@@ -155,7 +155,7 @@ export default function CartPage() {
               <div className="mt-4 space-y-2 border-t border-black/10 pt-4">
                 <div className="flex justify-between text-sm">
                   <span>Subtotal:</span>
-                  <span className="font-semibold">AED {total.toFixed(2)}</span>
+                  <span className="font-semibold">£{total.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span>Delivery:</span>
@@ -165,7 +165,7 @@ export default function CartPage() {
               <div className="mt-4 border-t border-black/10 pt-4">
                 <div className="flex justify-between text-lg font-semibold text-navy">
                   <span>Amount Due:</span>
-                  <span>AED {total.toFixed(2)}</span>
+                  <span>£{total.toFixed(2)}</span>
                 </div>
               </div>
             </div>

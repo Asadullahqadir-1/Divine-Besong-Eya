@@ -19,7 +19,7 @@ export const books = [
     featured: true,
     coverImageUrl: "",
     imageAlt: "WHERE I COME FROM FIRST SERIES cover",
-    price: null,
+    price: 5.99,
     pdfUrl: "",
   },
   {
@@ -30,7 +30,7 @@ export const books = [
     featured: true,
     coverImageUrl: "",
     imageAlt: "THE HIDDEN CODE TO EVERY CRISIS cover",
-    price: null,
+    price: 5.99,
     pdfUrl: "",
   },
 ];
