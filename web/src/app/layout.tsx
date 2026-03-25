@@ -24,10 +24,10 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.jpg", type: "image/jpeg" },
+      { url: "/logo.jpg", type: "image/jpeg" },
     ],
-    apple: [{ url: "/apple-icon.jpg", type: "image/jpeg" }],
-    shortcut: ["/icon.jpg"],
+    apple: [{ url: "/logo.jpg", type: "image/jpeg" }],
+    shortcut: ["/logo.jpg"],
   },
   applicationName: "Divine Besong Eya",
 };
