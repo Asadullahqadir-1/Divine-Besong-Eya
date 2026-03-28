@@ -8,9 +8,11 @@ import { CartIcon } from "@/components/CartIcon";
 const navItems = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Books", href: "/books" },
-  { label: "Learning Hub", href: "/mentorship-learning" },
-  { label: "Workshops", href: "/services" },
+  { label: "Services", href: "/services" },
+  { label: "Workshops", href: "/workshops" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Mentorship", href: "/mentorship" },
+  { label: "Insights", href: "/insights" },
   { label: "Contact", href: "/contact" },
 ];
 

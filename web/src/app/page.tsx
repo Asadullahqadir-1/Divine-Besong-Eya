@@ -132,7 +132,7 @@ export default async function HomePage() {
             <Link href="/contact" className="btn-live rounded-full bg-navy px-5 py-3 text-sm font-semibold text-white transition hover:bg-ink">
               Request a Session
             </Link>
-            <Link href="/mentorship-learning" className="btn-live rounded-full border border-navy px-5 py-3 text-sm font-semibold text-navy transition hover:bg-navy hover:text-white">
+            <Link href="/mentorship" className="btn-live rounded-full border border-navy px-5 py-3 text-sm font-semibold text-navy transition hover:bg-navy hover:text-white">
               Explore Learning Programs
             </Link>
           </div>
