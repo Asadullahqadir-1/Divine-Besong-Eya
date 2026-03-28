@@ -8,6 +8,10 @@ const config: Config = {
         ink: "#080A0C",
         navy: "#0E1B2D",
         gold: "#B58A3B",
+        "gold-light": "#D4AE5C",
+        bone: "#F5F0E8",
+        slate: "#2C2C2C",
+        light: "#EDE8DE",
         mist: "#F2F1EC",
       },
       fontFamily: {
