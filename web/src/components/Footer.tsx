@@ -17,7 +17,6 @@ const quickLinks = [
 export async function Footer() {
   const settings = await getSettingsData();
   const contact = settings.contact;
-  const showAdminLink = process.env.NEXT_PUBLIC_SHOW_ADMIN_LINK === "true";
 
   return (
     <footer className="relative mt-20 overflow-hidden border-t border-black/10 bg-gradient-to-br from-white to-mist">
@@ -31,7 +30,7 @@ export async function Footer() {
             A purpose-led platform advancing inclusion, equity, and human-centered impact for leaders and organizations.
           </p>
           <Link
-            href="/contact"
+            href="/book-session"
             className="btn-live mt-5 inline-flex rounded-full bg-navy px-5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white"
           >
             Book a Session
@@ -50,14 +49,12 @@ export async function Footer() {
                 {item.label}
               </Link>
             ))}
-            {showAdminLink ? (
-              <Link
-                href="/admin/login"
-                className="w-max font-semibold text-navy transition duration-200 hover:translate-x-1 hover:text-ink"
-              >
-                Admin Login
-              </Link>
-            ) : null}
+            <Link
+              href="/admin/login"
+              className="mt-2 inline-flex w-max border border-ink/25 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-navy transition hover:border-gold hover:text-gold"
+            >
+              Admin
+            </Link>
           </div>
         </div>
 

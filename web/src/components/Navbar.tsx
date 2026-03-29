@@ -16,8 +16,6 @@ const navItems = [
   { label: "Contact", href: "/contact" },
 ];
 
-const showAdminLink = process.env.NEXT_PUBLIC_SHOW_ADMIN_LINK === "true";
-
 export function Navbar() {
   const [open, setOpen] = useState(false);
 
@@ -47,14 +45,6 @@ export function Navbar() {
               {item.label}
             </Link>
           ))}
-          {showAdminLink ? (
-            <Link
-              href="/admin/login"
-              className="btn-live rounded-full border border-ink/30 px-4 py-2 text-sm font-semibold text-ink transition hover:border-navy hover:text-navy"
-            >
-              Admin Login
-            </Link>
-          ) : null}
           <CartIcon />
           <Link
             href="/book-session"
@@ -78,15 +68,6 @@ export function Navbar() {
                 {item.label}
               </Link>
             ))}
-            {showAdminLink ? (
-              <Link
-                href="/admin/login"
-                className="btn-live mt-1 inline-flex w-max rounded-full border border-ink/30 px-4 py-2 text-sm font-semibold text-ink"
-                onClick={() => setOpen(false)}
-              >
-                Admin Login
-              </Link>
-            ) : null}
             <Link
               href="/cart"
               className="btn-live mt-1 inline-flex w-max rounded-full border border-navy px-4 py-2 text-sm font-semibold text-navy"

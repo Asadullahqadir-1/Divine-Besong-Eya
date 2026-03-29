@@ -1,18 +1,11 @@
 import { NextResponse } from "next/server";
-import { createAdminSession, hasAdminAuthConfig, validateAdminPassword } from "@/lib/auth";
+import { createAdminSession, validateAdminPassword } from "@/lib/auth";
 
 type LoginPayload = {
   password?: string;
 };
 
 export async function POST(request: Request) {
-  if (!hasAdminAuthConfig()) {
-    return NextResponse.json(
-      { error: "Admin login is not configured. Set ADMIN_PASSWORD and ADMIN_SESSION_SECRET." },
-      { status: 500 }
-    );
-  }
-
   let body: LoginPayload;
   try {
     body = (await request.json()) as LoginPayload;

@@ -245,7 +245,7 @@ export function AdminBooksManager() {
             rows={5}
             value={form.description}
             onChange={(event) => updateForm("description", event.target.value)}
-            placeholder="Book description"
+            placeholder="Book caption / description"
             className="w-full rounded-lg border border-ink/20 px-4 py-2 text-sm outline-none focus:border-navy"
           />
           <input
@@ -253,14 +253,14 @@ export function AdminBooksManager() {
             type="url"
             value={form.externalLink}
             onChange={(event) => updateForm("externalLink", event.target.value)}
-            placeholder="https://example.com/buy-book"
+            placeholder="https://example.com/book-link (or PDF URL)"
             className="w-full rounded-lg border border-ink/20 px-4 py-2 text-sm outline-none focus:border-navy"
           />
           <input
             required
             value={form.imageAlt}
             onChange={(event) => updateForm("imageAlt", event.target.value)}
-            placeholder="Image alt text"
+            placeholder="Cover image alt text"
             className="w-full rounded-lg border border-ink/20 px-4 py-2 text-sm outline-none focus:border-navy"
           />
 
@@ -335,6 +335,7 @@ export function AdminBooksManager() {
 
       <section className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
         <h2 className="font-display text-3xl text-navy">Books</h2>
+        <p className="mt-2 text-xs text-ink/65">Manage title, caption, price, cover image, and PDF for each book.</p>
         {loading ? <p className="mt-4 text-sm text-ink/70">Loading books...</p> : null}
         {!loading && books.length === 0 ? <p className="mt-4 text-sm text-ink/70">No books found.</p> : null}
 

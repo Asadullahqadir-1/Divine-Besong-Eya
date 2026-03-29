@@ -4,6 +4,8 @@ import { cookies } from "next/headers";
 
 const ADMIN_COOKIE_NAME = "divine_admin_session";
 const ADMIN_SESSION_MAX_AGE_SECONDS = 60 * 60 * 8;
+const DEFAULT_ADMIN_PASSWORD = "Divine@2026";
+const DEFAULT_ADMIN_SESSION_SECRET = "divine-admin-session-secret-2026";
 
 type SessionPayload = {
   exp: number;
@@ -20,11 +22,11 @@ function safeCompare(value: string, expected: string) {
 }
 
 function getSessionSecret() {
-  return process.env.ADMIN_SESSION_SECRET || "";
+  return process.env.ADMIN_SESSION_SECRET || DEFAULT_ADMIN_SESSION_SECRET;
 }
 
 function getAdminPassword() {
-  return process.env.ADMIN_PASSWORD || "";
+  return process.env.ADMIN_PASSWORD || DEFAULT_ADMIN_PASSWORD;
 }
 
 function signValue(value: string) {
