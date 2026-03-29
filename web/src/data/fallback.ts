@@ -26,12 +26,12 @@ export const books = [
     title: "THE HIDDEN CODE TO EVERY CRISIS",
     slug: "the-hidden-code-to-every-crisis",
     description: "A practical framework for leading with clarity through uncertainty.",
-    externalLink: "https://www.amazon.com/s?k=THE+HIDDEN+CODE+TO+EVERY+CRISIS",
+    externalLink: "/uploads/books/the-hidden-code-to-every-crisis.pdf",
     featured: true,
-    coverImageUrl: "",
+    coverImageUrl: "/uploads/books/cover-book-2.jpg",
     imageAlt: "THE HIDDEN CODE TO EVERY CRISIS cover",
-    price: 5.99,
-    pdfUrl: "",
+    price: 9.99,
+    pdfUrl: "/uploads/books/the-hidden-code-to-every-crisis.pdf",
   },
 ];
 

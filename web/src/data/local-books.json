@@ -1,6 +1,18 @@
 {
   "books": [
     {
+      "_id": "local-the-hidden-code-to-every-crisis",
+      "title": "THE HIDDEN CODE TO EVERY CRISIS",
+      "slug": "the-hidden-code-to-every-crisis",
+      "description": "A practical leadership playbook for decoding pressure, uncertainty, and turning crisis moments into strategic breakthroughs.",
+      "externalLink": "/uploads/books/the-hidden-code-to-every-crisis.pdf",
+      "featured": true,
+      "coverImageUrl": "/uploads/books/cover-book-2.jpg",
+      "imageAlt": "THE HIDDEN CODE TO EVERY CRISIS book cover",
+      "price": 9.99,
+      "pdfUrl": "/uploads/books/the-hidden-code-to-every-crisis.pdf"
+    },
+    {
       "_id": "local-where-i-come-from",
       "title": "WHERE I COME FROM",
       "slug": "where-i-come-from",
