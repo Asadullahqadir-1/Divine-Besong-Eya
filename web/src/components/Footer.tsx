@@ -19,7 +19,7 @@ export async function Footer() {
   const contact = settings.contact;
 
   return (
-    <footer className="relative mt-20 overflow-hidden border-t border-black/10 bg-gradient-to-br from-white to-mist">
+    <footer className="relative overflow-hidden border-t border-black/10 bg-gradient-to-br from-white to-mist">
       <div className="pointer-events-none absolute -left-24 top-0 h-64 w-64 rounded-full bg-gold/10 blur-3xl float-slow" />
       <div className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-navy/10 blur-3xl float-fast" />
 
