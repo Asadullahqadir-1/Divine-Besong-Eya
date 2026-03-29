@@ -46,9 +46,9 @@ export function ContactForm() {
   }
 
   return (
-    <form className="grid gap-4 rounded-2xl border border-black/10 bg-white p-6 shadow-sm" onSubmit={handleSubmit}>
+    <form className="grid gap-4 border border-black/10 bg-white p-6 sm:p-7" onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="name" className="mb-2 block text-sm font-medium text-ink/80">
+        <label htmlFor="name" className="mb-2 block text-xs font-semibold uppercase tracking-[0.14em] text-ink/70">
           Name
         </label>
         <input
@@ -56,12 +56,12 @@ export function ContactForm() {
           name="name"
           type="text"
           required
-          className="h-11 w-full rounded-lg border border-black/20 px-3 text-sm focus:border-navy focus:outline-none"
+          className="h-11 w-full border border-black/20 bg-white px-3 text-sm focus:border-gold focus:outline-none"
         />
       </div>
 
       <div>
-        <label htmlFor="email" className="mb-2 block text-sm font-medium text-ink/80">
+        <label htmlFor="email" className="mb-2 block text-xs font-semibold uppercase tracking-[0.14em] text-ink/70">
           Email
         </label>
         <input
@@ -69,12 +69,12 @@ export function ContactForm() {
           name="email"
           type="email"
           required
-          className="h-11 w-full rounded-lg border border-black/20 px-3 text-sm focus:border-navy focus:outline-none"
+          className="h-11 w-full border border-black/20 bg-white px-3 text-sm focus:border-gold focus:outline-none"
         />
       </div>
 
       <div>
-        <label htmlFor="message" className="mb-2 block text-sm font-medium text-ink/80">
+        <label htmlFor="message" className="mb-2 block text-xs font-semibold uppercase tracking-[0.14em] text-ink/70">
           Message
         </label>
         <textarea
@@ -82,14 +82,14 @@ export function ContactForm() {
           name="message"
           required
           rows={6}
-          className="w-full rounded-lg border border-black/20 px-3 py-2 text-sm focus:border-navy focus:outline-none"
+          className="w-full border border-black/20 bg-white px-3 py-2 text-sm focus:border-gold focus:outline-none"
         />
       </div>
 
       <button
         type="submit"
         disabled={status === "sending"}
-        className="btn-live h-11 rounded-full bg-navy px-6 text-sm font-semibold text-white transition hover:bg-ink disabled:cursor-not-allowed disabled:opacity-70"
+        className="btn-live h-11 bg-ink px-6 text-xs font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-gold disabled:cursor-not-allowed disabled:opacity-70"
       >
         {status === "sending" ? "Sending..." : "Send Message"}
       </button>
@@ -97,7 +97,7 @@ export function ContactForm() {
       <div className="flex flex-wrap gap-3">
         <a
           href="mailto:div@theleadersmindset.net"
-          className="rounded-full border border-navy px-4 py-2 text-xs font-semibold text-navy transition hover:bg-navy hover:text-white"
+          className="border border-ink px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-ink transition hover:border-gold hover:text-gold"
         >
           Email Directly
         </a>
@@ -105,7 +105,7 @@ export function ContactForm() {
           href="https://wa.me/971526981013"
           target="_blank"
           rel="noreferrer"
-          className="rounded-full border border-emerald-700 px-4 py-2 text-xs font-semibold text-emerald-700 transition hover:bg-emerald-700 hover:text-white"
+          className="border border-black/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-ink/80 transition hover:border-gold hover:text-gold"
         >
           WhatsApp
         </a>

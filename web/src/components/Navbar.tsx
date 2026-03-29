@@ -57,7 +57,7 @@ export function Navbar() {
           ) : null}
           <CartIcon />
           <Link
-            href="/contact"
+            href="/book-session"
             className="btn-live rounded-full bg-navy px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-ink"
           >
             Book a Session
@@ -95,7 +95,7 @@ export function Navbar() {
               🛒 Cart
             </Link>
             <Link
-              href="/contact"
+              href="/book-session"
               className="btn-live mt-1 inline-flex w-max rounded-full bg-navy px-4 py-2 text-sm font-semibold text-white"
               onClick={() => setOpen(false)}
             >

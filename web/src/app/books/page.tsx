@@ -45,7 +45,7 @@ export default async function BooksPage() {
             )}
             <h2 className="font-display text-3xl leading-tight text-navy">{book.title}</h2>
             <p className="mt-3 text-sm text-ink/75">{book.description}</p>
-            <p className="mt-2 text-lg font-semibold text-navy">£{(book.price ?? 5.99).toFixed(2)}</p>
+            <p className="mt-2 text-lg font-semibold text-navy">${(book.price ?? 5.99).toFixed(2)}</p>
             <div className="mt-5 flex flex-wrap gap-3">
               <AddToCartButton
                 id={book.slug}

@@ -269,7 +269,7 @@ export function AdminBooksManager() {
             step="0.01"
             value={form.price}
             onChange={(event) => updateForm("price", event.target.value)}
-            placeholder="Price in £ (optional)"
+            placeholder="Price in $ (optional)"
             className="w-full rounded-lg border border-ink/20 px-4 py-2 text-sm outline-none focus:border-navy"
           />
 
@@ -346,7 +346,7 @@ export function AdminBooksManager() {
                   <p className="font-semibold text-navy">{book.title}</p>
                   <p className="text-xs text-ink/70">/{book.slug}</p>
                   {book.featured ? <p className="mt-1 text-xs font-semibold text-green-700">Featured</p> : null}
-                  {book.price ? <p className="mt-1 text-xs text-ink/75">£{book.price.toFixed(2)}</p> : null}
+                  {book.price ? <p className="mt-1 text-xs text-ink/75">${book.price.toFixed(2)}</p> : null}
                   {book.pdfUrl ? <p className="mt-1 text-xs text-blue-700">✓ PDF available</p> : null}
                 </div>
                 <div className="flex gap-2">
