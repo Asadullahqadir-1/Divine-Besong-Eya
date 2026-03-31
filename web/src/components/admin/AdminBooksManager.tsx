@@ -20,7 +20,6 @@ type FormState = {
   title: string;
   slug: string;
   description: string;
-  externalLink: string;
   featured: boolean;
   imageAlt: string;
   price: string;
@@ -30,7 +29,6 @@ const emptyForm: FormState = {
   title: "",
   slug: "",
   description: "",
-  externalLink: "",
   featured: false,
   imageAlt: "",
   price: "",
@@ -91,7 +89,6 @@ export function AdminBooksManager() {
       title: book.title,
       slug: book.slug,
       description: book.description,
-      externalLink: book.externalLink,
       featured: book.featured,
       imageAlt: book.imageAlt,
       price: book.price ? book.price.toString() : "",
@@ -246,14 +243,6 @@ export function AdminBooksManager() {
             value={form.description}
             onChange={(event) => updateForm("description", event.target.value)}
             placeholder="Book caption / description"
-            className="w-full rounded-lg border border-ink/20 px-4 py-2 text-sm outline-none focus:border-navy"
-          />
-          <input
-            required
-            type="url"
-            value={form.externalLink}
-            onChange={(event) => updateForm("externalLink", event.target.value)}
-            placeholder="https://example.com/book-link (or PDF URL)"
             className="w-full rounded-lg border border-ink/20 px-4 py-2 text-sm outline-none focus:border-navy"
           />
           <input

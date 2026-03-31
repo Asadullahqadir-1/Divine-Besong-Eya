@@ -36,7 +36,7 @@ export async function PATCH(request: Request, { params }: Params) {
 
   const title = body.title!.trim();
   const description = body.description!.trim();
-  const externalLink = body.externalLink!.trim();
+  const externalLink = body.externalLink?.trim();
   const featured = Boolean(body.featured);
   const slug = toSlug(body.slug?.trim() || title);
   const priceStr = body.price?.trim() || "";
@@ -71,7 +71,7 @@ export async function PATCH(request: Request, { params }: Params) {
       title,
       slug,
       description,
-      externalLink,
+      externalLink: externalLink ?? existingLocal.externalLink,
       featured,
       coverImageUrl: nextLocalImageUrl,
       imageAlt: body.imageAlt?.trim() || existingLocal.imageAlt,
@@ -108,7 +108,7 @@ export async function PATCH(request: Request, { params }: Params) {
       title,
       slug: { _type: "slug", current: slug },
       description: toPortableText(description),
-      externalLink,
+      ...(externalLink !== undefined && { externalLink }),
       featured,
       ...(price !== null && { price }),
       ...(pdfAsset && { pdf: { _type: "file", asset: { _type: "reference", _ref: pdfAsset } } }),
