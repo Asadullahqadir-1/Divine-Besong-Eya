@@ -32,6 +32,36 @@ const emptyForm: FormState = {
   price: "",
 };
 
+type ParsedResponse = {
+  body: Record<string, unknown> | null;
+  text: string;
+};
+
+async function parseResponse(response: Response): Promise<ParsedResponse> {
+  const text = await response.text();
+  if (!text) return { body: null, text: "" };
+
+  try {
+    return { body: JSON.parse(text) as Record<string, unknown>, text };
+  } catch {
+    return { body: null, text };
+  }
+}
+
+function getResponseErrorMessage(response: Response, parsed: ParsedResponse, fallback: string): string {
+  const maybeError = parsed.body?.error;
+  if (typeof maybeError === "string" && maybeError.trim()) {
+    return maybeError;
+  }
+
+  if (parsed.text.trim()) {
+    const compact = parsed.text.replace(/\s+/g, " ").trim();
+    return compact.length > 180 ? `${compact.slice(0, 177)}...` : compact;
+  }
+
+  return `${fallback} (status ${response.status})`;
+}
+
 export function AdminBooksManager() {
   const router = useRouter();
   const [books, setBooks] = useState<AdminBook[]>([]);
@@ -51,13 +81,14 @@ export function AdminBooksManager() {
 
     try {
       const response = await fetch("/api/admin/books", { cache: "no-store" });
-      const data = (await response.json()) as { books?: AdminBook[]; error?: string };
+      const parsed = await parseResponse(response);
+      const booksData = (parsed.body?.books as AdminBook[] | undefined) || [];
       if (!response.ok) {
-        setError(data.error || "Unable to load books.");
+        setError(getResponseErrorMessage(response, parsed, "Unable to load books."));
         return;
       }
 
-      setBooks(data.books || []);
+      setBooks(booksData);
     } catch {
       setError("Unexpected error while loading books.");
     } finally {
@@ -108,12 +139,13 @@ export function AdminBooksManager() {
         body: uploadData,
       });
 
-      const data = (await response.json()) as { assetId?: string; error?: string };
-      if (!response.ok || !data.assetId) {
-        throw new Error(data.error || "Image upload failed.");
+      const parsed = await parseResponse(response);
+      const assetId = typeof parsed.body?.assetId === "string" ? parsed.body.assetId : "";
+      if (!response.ok || !assetId) {
+        throw new Error(getResponseErrorMessage(response, parsed, "Image upload failed."));
       }
 
-      result.imageAssetId = data.assetId;
+      result.imageAssetId = assetId;
     }
 
     if (selectedPdfFile) {
@@ -126,12 +158,13 @@ export function AdminBooksManager() {
         body: uploadData,
       });
 
-      const data = (await response.json()) as { assetId?: string; error?: string };
-      if (!response.ok || !data.assetId) {
-        throw new Error(data.error || "PDF upload failed.");
+      const parsed = await parseResponse(response);
+      const assetId = typeof parsed.body?.assetId === "string" ? parsed.body.assetId : "";
+      if (!response.ok || !assetId) {
+        throw new Error(getResponseErrorMessage(response, parsed, "PDF upload failed."));
       }
 
-      result.pdfAssetId = data.assetId;
+      result.pdfAssetId = assetId;
     }
 
     return result;
@@ -166,9 +199,9 @@ export function AdminBooksManager() {
         body: JSON.stringify(payload),
       });
 
-      const data = (await response.json()) as { error?: string };
+      const parsed = await parseResponse(response);
       if (!response.ok) {
-        throw new Error(data.error || "Save failed.");
+        throw new Error(getResponseErrorMessage(response, parsed, "Save failed."));
       }
 
       startCreate();
@@ -188,9 +221,9 @@ export function AdminBooksManager() {
     setError(null);
     try {
       const response = await fetch(`/api/admin/books/${id}`, { method: "DELETE" });
-      const data = (await response.json()) as { error?: string };
+      const parsed = await parseResponse(response);
       if (!response.ok) {
-        throw new Error(data.error || "Delete failed.");
+        throw new Error(getResponseErrorMessage(response, parsed, "Delete failed."));
       }
 
       if (editingId === id) startCreate();
