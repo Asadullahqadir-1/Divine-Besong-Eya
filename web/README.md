@@ -40,14 +40,10 @@ ADMIN_SESSION_SECRET=replace-with-long-random-secret
 NEXT_PUBLIC_SHOW_ADMIN_LINK=true
 NEXT_PUBLIC_SITE_URL=https://your-domain.com
 
-# Contact form email delivery (SMTP)
+# Contact form email delivery (Resend)
 CONTACT_TO_EMAIL=div@theleadersmindset.net
 CONTACT_FROM_EMAIL=no-reply@theleadersmindset.net
-SMTP_HOST=smtp.your-provider.com
-SMTP_PORT=587
-SMTP_USER=your_smtp_username
-SMTP_PASS=your_smtp_password
-SMTP_SECURE=false
+RESEND_API_KEY=your_resend_api_key
 ```
 
 If `SANITY_API_WRITE_TOKEN` is missing, admin book management automatically uses a local JSON backend:
@@ -83,11 +79,7 @@ Contact form email delivery in production requires:
 ```bash
 CONTACT_TO_EMAIL=div@theleadersmindset.net
 CONTACT_FROM_EMAIL=no-reply@theleadersmindset.net
-SMTP_HOST=smtp.your-provider.com
-SMTP_PORT=587
-SMTP_USER=your_smtp_username
-SMTP_PASS=your_smtp_password
-SMTP_SECURE=false
+RESEND_API_KEY=your_resend_api_key
 ```
 
 Note: Local JSON/file uploads are development-only fallback. On Vercel, admin write/upload operations require Sanity write configuration.

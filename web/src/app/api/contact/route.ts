@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
 export const runtime = "nodejs";
 
@@ -13,19 +13,8 @@ function isValidEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
-function getSmtpConfig() {
-  const host = process.env.SMTP_HOST?.trim() || "";
-  const port = Number(process.env.SMTP_PORT || "587");
-  const user = process.env.SMTP_USER?.trim() || "";
-  const pass = process.env.SMTP_PASS?.trim() || "";
-  const secure = String(process.env.SMTP_SECURE || "false") === "true";
-
-  if (!host || !user || !pass || Number.isNaN(port)) {
-    return null;
-  }
-
-  return { host, port, user, pass, secure };
-}
+const resendApiKey = process.env.RESEND_API_KEY?.trim() || "";
+const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
 export async function POST(request: Request) {
   try {
@@ -48,34 +37,22 @@ export async function POST(request: Request) {
 
     const toEmail = process.env.CONTACT_TO_EMAIL?.trim() || "";
     const fromEmail = process.env.CONTACT_FROM_EMAIL?.trim() || "";
-    const smtpConfig = getSmtpConfig();
 
-    if (!smtpConfig || !toEmail || !fromEmail) {
-      // Keep local/dev flow functional even when SMTP is not configured yet.
-      return NextResponse.json({
-        ok: true,
-        message: "Message received. Email delivery is not configured yet.",
-      });
+    if (!resend || !toEmail || !fromEmail) {
+      return NextResponse.json(
+        { ok: false, error: "Email delivery is not configured." },
+        { status: 500 }
+      );
     }
-
-    const transporter = nodemailer.createTransport({
-      host: smtpConfig.host,
-      port: smtpConfig.port,
-      secure: smtpConfig.secure,
-      auth: {
-        user: smtpConfig.user,
-        pass: smtpConfig.pass,
-      },
-    });
 
     const safeName = name.replace(/[\r\n]/g, " ");
     const safeEmail = email.replace(/[\r\n]/g, " ");
     const safeMessage = message.replace(/\r\n/g, "\n").trim();
 
     try {
-      await transporter.sendMail({
+      await resend.emails.send({
         from: fromEmail,
-        to: toEmail,
+        to: [toEmail],
         replyTo: safeEmail,
         subject: `New contact form message from ${safeName}`,
         text: [
@@ -89,10 +66,10 @@ export async function POST(request: Request) {
         ].join("\n"),
       });
     } catch {
-      return NextResponse.json({
-        ok: true,
-        message: "Message received. Email delivery is temporarily unavailable.",
-      });
+      return NextResponse.json(
+        { ok: false, error: "Message could not be sent right now. Please try again." },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({ ok: true, message: "Thanks. Your message has been sent successfully." });
