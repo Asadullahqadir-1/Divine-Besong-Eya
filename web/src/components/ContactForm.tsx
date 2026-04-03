@@ -28,7 +28,15 @@ export function ContactForm() {
         body: JSON.stringify({ name, email, message }),
       });
 
-      const data = (await response.json()) as { ok?: boolean; message?: string; error?: string };
+      let data: { ok?: boolean; message?: string; error?: string } = {};
+      const contentType = response.headers.get("content-type") || "";
+
+      if (contentType.includes("application/json")) {
+        data = (await response.json()) as { ok?: boolean; message?: string; error?: string };
+      } else {
+        const rawText = await response.text();
+        data.error = rawText ? `Request failed (${response.status}).` : undefined;
+      }
 
       if (!response.ok) {
         setStatus("error");
@@ -41,7 +49,7 @@ export function ContactForm() {
       event.currentTarget.reset();
     } catch {
       setStatus("error");
-      setFeedback("Network issue. Please try again.");
+      setFeedback("Network issue. Please check your connection and try again.");
     }
   }
 

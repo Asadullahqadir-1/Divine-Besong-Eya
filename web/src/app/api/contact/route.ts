@@ -16,6 +16,17 @@ function isValidEmail(value: string) {
 const resendApiKey = process.env.RESEND_API_KEY?.trim() || "";
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
+export async function GET() {
+  const toEmail = process.env.CONTACT_TO_EMAIL?.trim() || "";
+  const fromEmail = process.env.CONTACT_FROM_EMAIL?.trim() || "";
+
+  return NextResponse.json({
+    ok: true,
+    service: "resend",
+    configured: Boolean(resend && toEmail && fromEmail),
+  });
+}
+
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as ContactBody;
@@ -50,7 +61,7 @@ export async function POST(request: Request) {
     const safeMessage = message.replace(/\r\n/g, "\n").trim();
 
     try {
-      await resend.emails.send({
+      const { error } = await resend.emails.send({
         from: fromEmail,
         to: [toEmail],
         replyTo: safeEmail,
@@ -65,6 +76,13 @@ export async function POST(request: Request) {
           safeMessage,
         ].join("\n"),
       });
+
+      if (error) {
+        return NextResponse.json(
+          { ok: false, error: "Email provider rejected the message. Check sender domain verification." },
+          { status: 500 }
+        );
+      }
     } catch {
       return NextResponse.json(
         { ok: false, error: "Message could not be sent right now. Please try again." },
